@@ -1,4 +1,10 @@
-cards = []
+
+# placeholder cards for testing
+cards = [
+    {'card_id': 0, 'name': "A", 'description': "aaaa", 'effects': "ow,-5", 'await': "", 'eff_after_await': "", 'cost': "p,3", 'discard': "p,2"},
+    {'card_id': 1, 'name': "B", 'description': "bbbb", 'effects': "yw,+5", 'await': "", 'eff_after_await': "", 'cost': "j,3", 'discard': "j,1"},
+    {'card_id': 2, 'name': "C", 'description': "cccc", 'effects': "", 'await': "D2", 'eff_after_await': "", 'cost': "r,3", 'discard': "r,1"},
+]
 
 class GameEngine():
 

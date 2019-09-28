@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game screen</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        div {
+            border-style: solid;
+            border-width: 2px;
+        }
+        .towers_resources {
+            height: 200px;
+            width: 100%
+        }
+        .your_resources, .opp_resources{
+            color: red;
+            min-height: 200px;
+            width: 20%;
+        }
+
+        .your_tower, .opp_tower{
+            min-height: 200px;
+            height: 100%;
+            width: 30%;
+        }
+
+        .your_tower, .your_resources{
+            float: left;
+            text-align: left;
+        }
+
+        .opp_tower, .opp_resources{
+            float: left;
+            text-align: right;
+        }
+
+        .message{
+            min-height: 150px;
+            overflow-wrap: break-word;
+         }
+
+
+
+         .card{
+            min-height: 250px;
+            width: 16.66%;
+            float: left;
+         }
+         .card_name{
+            min-height: 50px;
+            text-align: center;
+            overflow-wrap: break-word;
+         }
+         .card_description{
+           	min-height: 125px;
+            text-align: center;
+            overflow-wrap: break-word;
+         }
+         .cost_gain{
+            min-height: 75px;
+         }
+         .cost{
+            float: left;
+            width: 50%;
+            height: 75px;
+            text-align: left;
+            overflow-wrap: break-word;
+         }
+         .gain{
+            float: left;
+            width: 50%;
+            height: 75px;
+            text-align: right;
+            overflow-wrap: break-word;
+         }
+
+         .tower_text{
+            min-height: 50px;
+         }
+         .towerwall_bars{
+            min-height: 150px;
+
+            position: relative;
+         }
+         .your_tower_bar, .opp_tower_bar{
+            width: 50%;
+            position: absolute;
+            bottom: 0;
+            background-color: blue;
+         }
+         .your_wall_bar, .opp_wall_bar{
+            width: 50%;
+            position: absolute;
+            bottom: 0;
+            background-color: yellow;
+         }
+
+         .your_tower_bar, .opp_wall_bar{
+         }
+
+         .your_wall_bar, .opp_tower_bar{
+            left: 50%;
+         }
+
+    </style>
+</head>
+<body>
+    <div class="towers_resources">
+        <div class="your_resources">
+            Your resources<br>
+            Coffeehouses: {{game.y_coffee}}<br>
+            Javas: {{game.y_javas}}<br><br>
+
+            Mines: {{game.y_mines}}<br>
+            Rubies: {{game.y_rubies}}<br><br>
+
+            Dungeons: {{game.y_dungeons}}<br>
+            Pythons: {{game.y_pythons}}<br><br>
+        </div>
+        <div class="your_tower">
+            <div class="tower_text">
+                Tower: 30<br>
+                Wall: 20<br>
+            </div>
+            <div class="towerwall_bars">
+                <div class="your_tower_bar" style="height: 80px;" id="your_tower_bar">30</div>
+                <div class="your_wall_bar" style="height: 70px;" id="your_wall_bar">20</div>
+            </div>
+        </div>
+        <div class="opp_tower">
+            <div class="tower_text">
+                Tower: 50<br>
+                Wall: 15<br>
+            </div>
+            <div class="towerwall_bars">
+                <div class="opp_wall_bar" style="height: 50px;" id="opp_wall_bar">15</div>
+                <div class="opp_tower_bar" style="height: 100px;" id="opp_tower_bar">50</div>
+            </div>
+        </div>
+        <div class="opp_resources">
+            Resources<br>
+            A: 10<br>
+            B: 10<br>
+        </div>
+    </div>
+
+    <div class="message">Message</div>
+
+    <div class="cards_list">
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <div class="card_name">card1_name sja sjhsjas</div>
+            <div class="card_description">card1_descsjd sbfbf kbafjb dkabk askhbdjhasb asdbjhas bdhj</div>
+            <div class="cost_gain">
+                <div class="cost">card1_cost</div>
+                <div class="gain">card1_gain</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
