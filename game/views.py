@@ -28,11 +28,11 @@ def game(request, game_id):
         game_object = Game.objects.get(game_id = game_id)
         message = "Showing current game state"
 
-        #to be determined by game mechanics
+        # to be determined by game mechanics
         cards = []
         for i in range(6):
-            cards.append({'id': i, 'name': "B", 'descr': "bbbb bbbbbbbb bbbb bbbbbbb", 'cost': '5J', 'gain': '3J'})
-        cards[0] = {'id': 0, 'name': "A", 'descr': "aaa aaaaaa aaa aaa aaaaa", 'cost': '5P', 'gain': '2P'}
+            cards.append({'id': i, 'name': "B", 'descr': "bbbb bbbbbbbb bbbb bbbbbbb", 'cost': '5 J', 'gain': '3 J'})
+        cards[0] = {'id': 0, 'name': "A", 'descr': "aaa aaaaaa aaa aaa aaaaa", 'cost': '5 P', 'gain': '2 P'}
         bars = {'yt': 30, 'yw': 20, 'ot': 40, 'ow': 40}
 
         return render(request, 'game/game_template.html', {'game': game_object, 'message': message, 'cards': cards, 'bars': bars})
