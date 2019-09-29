@@ -4,6 +4,7 @@ import game.mechanics as mechanics
 import json
 # Create your models here.
 
+
 class Game(models.Model):
 
     NONZERO = ('y_coffee', 'o_coffee', 'y_mines', 'o_mines', 'y_dungeons', 'o_dungeons')

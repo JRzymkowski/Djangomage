@@ -5,10 +5,16 @@ from random import choice
 # awaited can have single action/number pair
 # cost and discard can affect only one resource type
 CARDS = (
-    {'card_id': 0, 'name': "A", 'description': "aaaa", 'effects': "o_wall,-5", 'awaited': "", 'eff_after_awaited': "", 'cost': "3 P", 'discard': "2 P"},
-    {'card_id': 1, 'name': "B", 'description': "bbbb", 'effects': "y_wall,+5", 'awaited': "", 'eff_after_awaited': "", 'cost': "3 J", 'discard': "1 J"},
-    {'card_id': 2, 'name': "C", 'description': "cccc", 'effects': "", 'awaited': "D2", 'eff_after_awaited': "", 'cost': "5 R", 'discard': "1 J"},
+    {'card_id': 0, 'name': "A", 'description': "5 damage to opponent's wall", 'effects': "o_wall,-5", 'awaited': "",
+     'eff_after_awaited': "", 'cost': "3 P", 'gain': "2 P"},
+    {'card_id': 1, 'name': "B", 'description': "Your wall gain 7", 'effects': "y_wall,+7", 'awaited': "",
+     'eff_after_awaited': "", 'cost': "3 J", 'gain': "1 J"},
+    {'card_id': 2, 'name': "C", 'description': "Discard two cards", 'effects': "",
+     'awaited': "D2", 'eff_after_awaited': "", 'cost': "5 R", 'gain': "1 J"},
+    {'card_id': 3, 'name': "D", 'description': "Your wall gain 15", 'effects': "y_wall,15",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "10 J", 'gain': "1 J"},
 )
+
 
 class GameEngine:
 
@@ -70,6 +76,7 @@ class GameEngine:
         cards_in_hand[card_number] = new_card_id
         self.game_object.y_cards = json.dumps(cards_in_hand)
 
+
     def resolve_action(self, action):
         # modifies self.game_object and returns message
 
@@ -114,9 +121,10 @@ class GameEngine:
                 elif res == "P":
                     self.game_object.y_pythons -= val
 
-            effects = card['effects'].split(";")
-            for instr in effects:
-                self.game_object.change_val(instr)
+            if card['effects'] != "":
+                effects = card['effects'].split(";")
+                for instr in effects:
+                    self.game_object.change_val(instr)
             if card['awaited'] != "":
                 self.game_object.awaited = card['awaited']
 
@@ -209,9 +217,21 @@ class GameEngine:
     def get_cards_data(self):
         cards_data = []
         for i in range(6):
-            card = self.get_chosen_card(i)
+            card = self.get_chosen_card(i).copy()
+            card['id'] = i
 
             # this might need repackaging
             cards_data.append(card)
         return cards_data
 
+    def gain_resources(self):
+        self.game_object.y_javas += self.game_object.y_coffee
+        self.game_object.o_javas += self.game_object.o_coffee
+
+        self.game_object.y_rubies += self.game_object.y_mines
+        self.game_object.o_rubies += self.game_object.o_mines
+
+        self.game_object.y_pythons += self.game_object.y_dungeons
+        self.game_object.o_pythons += self.game_object.o_dungeons
+
+        self.game_object.save()

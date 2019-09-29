@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <div class="message">{{message}}</div>
+    <div class="message">{{message|safe}}</div>
 
     <div class="cards_list">
 
@@ -166,16 +166,16 @@
             <div class="cost_gain">
                 <div class="cost">
                     {{card.cost}}
-                    <form action="" method="post">
+                    <form action="/game/game/{{game.game_id}}" method="post">
                         {% csrf_token %}
-                        <input type="submit" name="play{{card.id}}" value="Play">
+                        <input type="submit" name="card{{card.id}}" value="Play">
                     </form>
                 </div>
                 <div class="gain">
                     {{card.gain}}
-                    <form action="" method="post">
+                    <form action="/game/game/{{game.game_id}}" method="post">
                         {% csrf_token %}
-                        <input type="submit" name="discard{{card.id}}" value="Discard">
+                        <input type="submit" name="card{{card.id}}" value="Discard">
                     </form>
                 </div>
             </div>
