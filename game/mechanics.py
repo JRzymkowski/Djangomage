@@ -4,15 +4,56 @@ from random import choice
 # placeholder cards for testing
 # awaited can have single action/number pair
 # cost and discard can affect only one resource type
+# gain to your coffeehouse, mines or dungeons always is the first effect
+# effects should always have +/- sign
 CARDS = (
-    {'card_id': 0, 'name': "A", 'description': "5 damage to opponent's wall", 'effects': "o_wall,-5", 'awaited': "",
-     'eff_after_awaited': "", 'cost': "3 P", 'gain': "2 P"},
-    {'card_id': 1, 'name': "B", 'description': "Your wall gain 7", 'effects': "y_wall,+7", 'awaited': "",
-     'eff_after_awaited': "", 'cost': "3 J", 'gain': "1 J"},
-    {'card_id': 2, 'name': "C", 'description': "Discard two cards", 'effects': "",
+    {'card_id': 0, 'name': "Sneaky attack", 'description': "5 damage to opponent's wall", 'effects': "o_wall,-5", 'awaited': "",
+     'eff_after_awaited': "", 'cost': "5 P", 'gain': "1 P"},
+    {'card_id': 1, 'name': "Stonemasons", 'description': "Your wall gain 7", 'effects': "y_wall,+7", 'awaited': "",
+     'eff_after_awaited': "", 'cost': "5 J", 'gain': "1 J"},
+    {'card_id': 2, 'name': "Bookkeeping", 'description': "Discard two cards", 'effects': "",
      'awaited': "D2", 'eff_after_awaited': "", 'cost': "5 R", 'gain': "1 J"},
-    {'card_id': 3, 'name': "D", 'description': "Your wall gain 15", 'effects': "y_wall,15",
+    {'card_id': 3, 'name': "Extra scaffolding", 'description': "Your wall gain 15", 'effects': "y_wall,+15",
      'awaited': "", 'eff_after_awaited': "", 'cost': "10 J", 'gain': "1 J"},
+    {'card_id': 4, 'name': "New coffee machine", 'description': "Your gain one coffeehouse", 'effects': "y_coffee,+1",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "7 R", 'gain': "1 R"},
+    {'card_id': 5, 'name': "Better pickaxes", 'description': "Your gain one mine", 'effects': "y_mines,+1",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "8 P", 'gain': "2 P"},
+    {'card_id': 6, 'name': "Deeper dungeons", 'description': "Your gain one dungeon", 'effects': "y_dungeons,+1",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "5 J", 'gain': "2 J"},
+    {'card_id': 7, 'name': "Mutual destruction", 'description': "10 damage to opponent, 5 damage to you", 'effects': "o_wall,-10;y_wall,-5",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "10 P", 'gain': "1 P"},
+    {'card_id': 8, 'name': "Prism", 'description': "Gain 5 rubies and discard one card", 'effects': "y_rubies,+5",
+     'awaited': "D1", 'eff_after_awaited': "", 'cost': "6 J", 'gain': "1 J"},
+    {'card_id': 9, 'name': "Snake attack", 'description': "4 damage to opponent's tower", 'effects': "o_tower,-4",
+     'awaited': "", 'eff_after_awaited': "", 'cost': "6 P", 'gain': "1 J"},
+    {'card_id': 10, 'name': "Bountiful harvest", 'description': "You and the opponent gain one coffeehouse",
+     'effects': "y_coffee,+1;o_coffee,+1", 'awaited': "", 'eff_after_awaited': "", 'cost': "7 J", 'gain': "1 J"},
+    {'card_id': 11, 'name': "Earthquake", 'description': "You and the opponent lose one mine",
+     'effects': "y_mines,-1;o_mines,-1", 'awaited': "", 'eff_after_awaited': "", 'cost': "5 P", 'gain': "2 R"},
+    {'card_id': 12, 'name': "Free stuff", 'description': "Gain 5 javas and 5 rubies",
+     'effects': "y_javas,+5;y_rubies,+5", 'awaited': "", 'eff_after_awaited': "", 'cost': "3 P", 'gain': "2 R"},
+    {'card_id': 13, 'name': "Extreme digging", 'description': "Gain 2 mines",
+     'effects': "y_mines,+2", 'awaited': "", 'eff_after_awaited': "", 'cost': "11 J", 'gain': "2 R"},
+    {'card_id': 14, 'name': "Rot", 'description': "You lose 3 javas, opponent loses 10 javas",
+     'effects': "o_javas,-10;y_javas,-3", 'awaited': "", 'eff_after_awaited': "", 'cost': "7 R", 'gain': "2 J"},
+    {'card_id': 15, 'name': "Fortifications", 'description': "You gain 8 wall",
+     'effects': "y_wall,+8", 'awaited': "", 'eff_after_awaited': "", 'cost': "6 J", 'gain': "2 J"},
+    {'card_id': 16, 'name': "Elven magic", 'description': "Your tower gains 10",
+     'effects': "y_tower,+10", 'awaited': "", 'eff_after_awaited': "", 'cost': "8 R", 'gain': "2 P"},
+    {'card_id': 17, 'name': "Glitter", 'description': "You gain 7 rubies",
+     'effects': "y_rubies,+7", 'awaited': "", 'eff_after_awaited': "", 'cost': "5 P", 'gain': "2 J"},
+    {'card_id': 18, 'name': "Ogre", 'description': "Deal 5 damage to your opponent",
+     'effects': "o_wall,-5", 'awaited': "", 'eff_after_awaited': "", 'cost': "5 P", 'gain': "1 J"},
+    {'card_id': 19, 'name': "Bad air", 'description': "You and your opponent gain one more dungeon",
+     'effects': "y_dungeons,+1;o_dungeons,+1", 'awaited': "", 'eff_after_awaited': "", 'cost': "8 R", 'gain': "2 R"},
+    {'card_id': 20, 'name': "Imps", 'description': "Deal 7 damage to opponent's tower",
+     'effects': "o_tower,-7", 'awaited': "", 'eff_after_awaited': "", 'cost': "8 P", 'gain': "1 J"},
+    {'card_id': 21, 'name': "Strategy", 'description': "Play or discard two cards",
+     'effects': "", 'awaited': "P2", 'eff_after_awaited': "", 'cost': "5 R", 'gain': "3 P"},
+    {'card_id': 22, 'name': "Worker goblins", 'description': "Your wall gains 8",
+     'effects': "y_wall,+8", 'awaited': "", 'eff_after_awaited': "", 'cost': "6 P", 'gain': "3 P"},
+
 )
 
 
@@ -125,6 +166,12 @@ class GameEngine:
                 effects = card['effects'].split(";")
                 for instr in effects:
                     self.game_object.change_val(instr)
+
+            if self.game_object.y_wall < 0:
+                self.game_object.y_tower += self.game_object.y_wall
+            if self.game_object.o_wall < 0:
+                self.game_object.o_tower += self.game_object.o_wall
+
             if card['awaited'] != "":
                 self.game_object.awaited = card['awaited']
 
@@ -148,6 +195,34 @@ class GameEngine:
 
         return -1, 1
 
+    def opponent_affords(self, card):
+        can_afford = True
+        if card['cost'] != "":
+            cost = card['cost'].split(' ')
+            res = cost[1]
+            val = int(cost[0])
+            if res == "J":
+                if self.game_object.o_javas < val:
+                    can_afford = False
+            elif res == "R":
+                if self.game_object.o_rubies < val:
+                    can_afford = False
+            elif res == "P":
+                if self.game_object.o_pythons < val:
+                    can_afford = False
+
+        return can_afford
+
+    def increases_generators(self, card):
+        if card['effects'][:10] == 'y_coffee,+':
+            return True
+        elif card['effects'][:9] == 'y_mines,+':
+            return True
+        elif card['effects'][:12] == 'y_dungeons,+':
+            return True
+        else:
+            return False
+
     def AI_action(self):
         # pretends to choose card and action
         # modifies self.game_object and returns message
@@ -156,10 +231,34 @@ class GameEngine:
 
         # here will be process of choosing action type and card (involving checking costs)
 
-        #
+        card_chosen = False
 
-        card = list(filter(lambda x: x['card_id'] == 0, CARDS))[0]
-        action_type = "P"
+        # look for card increasing resources generator
+
+        card = CARDS[0]
+        action_type = "D"
+
+        for i in range(6):
+            candidate = choice(CARDS)
+            if self.increases_generators(candidate) and self.opponent_affords(candidate):
+                card_chosen = True
+                card = candidate
+                action_type = "P"
+                break
+
+        if card_chosen == False:
+            for i in range(6):
+                candidate = choice(CARDS)
+                if self.opponent_affords(candidate):
+                    card_chosen = True
+                    card = candidate
+                    action_type = "P"
+                    break
+
+        if card_chosen == False:
+            card = choice(CARDS)
+            action_type = "D"
+
 
         # resolving opponent's action
 
@@ -198,6 +297,11 @@ class GameEngine:
                 elif instr[0] == "y":
                     inv_instr = "o" + instr[1:]
                 self.game_object.change_val(inv_instr)
+
+            if self.game_object.y_wall < 0:
+                self.game_object.y_tower += self.game_object.y_wall
+            if self.game_object.o_wall < 0:
+                self.game_object.o_tower += self.game_object.o_wall
 
             message = "Opponent played " + card['name'] + " with this effects: " + card['description']
 

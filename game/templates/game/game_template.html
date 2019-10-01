@@ -7,25 +7,30 @@
     <style>
         * {
             box-sizing: border-box;
+            font-family: verdana;
+            font-size: 11pt;
         }
         div {
+
+        }
+        .towers_resources {
+            height: 200px;
+            width: 100%
             border-style: solid;
             border-width: 2px;
         }
-        .towers_resources {
-            height: 250px;
-            width: 100%
-        }
         .your_resources, .opp_resources{
-            color: red;
-            min-height: 250px;
+            min-height: 200px;
             width: 20%;
+            background-color: #A0A0E0;
+            padding: 5px;
         }
 
         .your_tower, .opp_tower{
-            min-height: 250px;
+            min-height: 200px;
             height: 100%;
             width: 30%;
+            background-color: #A0C0C0;
         }
 
         .your_tower, .your_resources{
@@ -39,8 +44,11 @@
         }
 
         .message{
-            min-height: 100px;
+            min-height: 150px;
             overflow-wrap: break-word;
+            border-style: solid;
+            border-width: 2px;
+            padding: 10px;
          }
 
 
@@ -49,16 +57,21 @@
             min-height: 250px;
             width: 16.66%;
             float: left;
+            border-style: solid;
+            border-width: 2px;
+            background-color: #90E090;
          }
          .card_name{
             min-height: 50px;
             text-align: center;
             overflow-wrap: break-word;
+            padding: 5px;
          }
          .card_description{
            	min-height: 125px;
             text-align: center;
             overflow-wrap: break-word;
+            padding: 5px;
          }
          .cost_gain{
             min-height: 75px;
@@ -69,6 +82,7 @@
             height: 75px;
             text-align: left;
             overflow-wrap: break-word;
+            padding: 5px;
          }
          .gain{
             float: left;
@@ -76,14 +90,15 @@
             height: 75px;
             text-align: right;
             overflow-wrap: break-word;
+            padding: 5px;
          }
 
          .tower_text{
-            min-height: 30%;
+            min-height: 50px;
+            padding: 5px;
          }
          .towerwall_bars{
-            min-height: 70%;
-
+            min-height: 150px;
             position: relative;
          }
          .your_tower_bar, .opp_tower_bar{
@@ -91,12 +106,14 @@
             position: absolute;
             bottom: 0;
             background-color: blue;
+            padding: 5px;
          }
          .your_wall_bar, .opp_wall_bar{
             width: 50%;
             position: absolute;
             bottom: 0;
             background-color: yellow;
+            padding: 5px;
          }
 
          .your_tower_bar, .opp_wall_bar{
@@ -165,6 +182,7 @@
             <div class="card_description">{{card.description}}</div>
             <div class="cost_gain">
                 <div class="cost">
+                    Cost:<br>
                     {{card.cost}}
                     <form action="/game/game/{{game.game_id}}" method="post">
                         {% csrf_token %}
@@ -172,6 +190,7 @@
                     </form>
                 </div>
                 <div class="gain">
+                    Gain:<br>
                     {{card.gain}}
                     <form action="/game/game/{{game.game_id}}" method="post">
                         {% csrf_token %}
