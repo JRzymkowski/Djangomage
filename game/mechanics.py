@@ -249,7 +249,7 @@ class GameEngine:
         if card_chosen == False:
             for i in range(6):
                 candidate = choice(CARDS)
-                if self.opponent_affords(candidate):
+                if self.opponent_affords(candidate) and candidate['awaited'] == "":
                     card_chosen = True
                     card = candidate
                     action_type = "P"
@@ -290,13 +290,14 @@ class GameEngine:
 
             # invert o_ with y_
             effects = card['effects'].split(";")
-            for instr in effects:
-                inv_instr = ""
-                if instr[0] == "o":
-                    inv_instr = "y" + instr[1:]
-                elif instr[0] == "y":
-                    inv_instr = "o" + instr[1:]
-                self.game_object.change_val(inv_instr)
+            if len(effects) > 0:
+                for instr in effects:
+                    inv_instr = ""
+                    if instr[0] == "o":
+                        inv_instr = "y" + instr[1:]
+                    elif instr[0] == "y":
+                        inv_instr = "o" + instr[1:]
+                    self.game_object.change_val(inv_instr)
 
             if self.game_object.y_wall < 0:
                 self.game_object.y_tower += self.game_object.y_wall
