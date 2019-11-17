@@ -1,0 +1,21 @@
+version: "3.5"
+services:
+  postgres:
+    container_name: django-postgres
+    image: postgres:10.5-alpine
+    ports:
+      - 25432:5432
+    environment:
+      POSTGRES_USER: 'username'
+      POSTGRES_PASSWORD: '123'
+      POSTGRES_DB: 'rzym'
+  app:
+    container_name: django-mage
+    restart: always
+    build: .
+    ports:
+      - '8100:8100'
+    expose:
+      - '8100'
+    depends_on:
+      - postgres
